@@ -19,7 +19,6 @@ export default function Header() {
       <p className="text-xl font-semibold">Beanmarket</p>
       <p>장바구니</p>
       <HiShoppingCart />
-      <p>프로필</p>
       <p>상품등록</p>
 
       <a href="/login">로그인</a>
