@@ -19,7 +19,7 @@ export default function Header() {
       <p className="text-xl font-semibold">Beanmarket</p>
       <p>장바구니</p>
       <HiShoppingCart />
-      <p>상품등록</p>
+      <a href="/product/register">상품등록</a>
 
       <a href="/login">로그인</a>
       {/* <button onClick={onClickLogout}>로그아웃</button> */}
