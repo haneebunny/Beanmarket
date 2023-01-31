@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 import { HiShoppingCart } from "react-icons/hi";
 // import { getAuth, signOut } from "firebase/auth";
@@ -15,14 +16,18 @@ export default function Header() {
   //     });
   // };
   return (
-    <div className="flex flex-row items-center">
-      <p className="text-xl font-semibold">Beanmarket</p>
-      <p>장바구니</p>
-      <HiShoppingCart />
-      <a href="/product/register">상품등록</a>
+    <header className="flex flex-row justify-between items-center">
+      <Link href="/">
+        <p className="text-xl font-semibold">Beanmarket</p>
+      </Link>
+      <nav className="flex items-center gap-4">
+        <p>장바구니</p>
+        <HiShoppingCart />
+        <a href="/product/register">상품등록</a>
 
-      <a href="/login">로그인</a>
-      {/* <button onClick={onClickLogout}>로그아웃</button> */}
-    </div>
+        <a href="/login">로그인</a>
+        {/* <button onClick={onClickLogout}>로그아웃</button> */}
+      </nav>
+    </header>
   );
 }
