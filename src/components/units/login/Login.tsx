@@ -1,31 +1,20 @@
-import React from "react";
-import { GoogleLogin } from "../../../api/firebase.js";
+import React, { useState } from "react";
+import { googleLogin, googleLogout } from "../../../api/firebase.js";
 // import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 
 // const googleProvider = new GoogleAuthProvider();
 // const auth = getAuth();
 export default function Login() {
-  // GoogleLogin();
-  // signInWithPopup(auth, googleProvider)
-  //   .then((result) => {
-  //     const user = result.user;
-  //     console.log(user);
-  //     // ...
-  //   })
-  //   .catch((error) => {
-  //     console.error(error);
-  //   });
-  // const onClickGoogleLogin = () => {
-  //   signInWithPopup(auth, googleProvider)
-  //     .then((result) => {
-  //       const user = result.user;
-  //       console.log(user);
-  //       // ...
-  //     })
-  //     .catch((error) => {
-  //       console.error(error);
-  //     });
+  const [user, setUser] = useState<any>();
+  // const handleLogin = () => {
   // };
+
+  googleLogin().then((result) => console.log(result));
+
+  const handleLogout = () => {
+    googleLogout();
+  };
+
   return (
     <div className="flex flex-col">
       <form className="flex flex-col items-center">
@@ -33,7 +22,8 @@ export default function Login() {
         <input className="w-52 border border-gray-700 focus:outline-none" />
         하이
         <input></input>
-        <button onClick={GoogleLogin}>Google</button>
+        {/* <button onClick={handleLogin}>Google</button> */}
+        <button onClick={handleLogout}>Logout</button>
       </form>
     </div>
   );
