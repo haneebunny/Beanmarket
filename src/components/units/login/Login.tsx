@@ -9,10 +9,10 @@ export default function Login() {
   // const handleLogin = () => {
   // };
 
-  googleLogin().then((result) => console.log(result));
+  googleLogin().then((user) => setUser(user));
 
   const handleLogout = () => {
-    googleLogout();
+    googleLogout().then(setUser);
   };
 
   return (

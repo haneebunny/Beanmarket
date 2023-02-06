@@ -4,7 +4,9 @@ import {
   signInWithPopup,
   GoogleAuthProvider,
   signOut,
+  onAuthStateChanged,
 } from "firebase/auth";
+import { getDatabase, ref, set } from "firebase/database";
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -19,22 +21,28 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const googleProvider = new GoogleAuthProvider();
-export const auth = getAuth(app);
+const auth = getAuth(app);
+const database = getDatabase(app);
 
 export async function googleLogin() {
-  return signInWithPopup(auth, googleProvider)
-    .then((result) => {
-      const user = result.user;
-      console.log(user);
-      return user;
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+  return signInWithPopup(auth, googleProvider).catch((error) => {
+    console.error(error);
+  });
 }
 
 export async function googleLogout() {
-  return signOut(auth)
-    .then(() => console.log("로그아웃"))
-    .catch((error) => console.log(error));
+  return signOut(auth).catch((error) => console.log(error));
+}
+
+export function onUserStateChange(callback) {
+  onAuthStateChanged(auth, (user) => {
+    callback(user);
+  });
+}
+
+export function writeUserData(userId) {
+  const db = getDatabase();
+  set(ref(db, "admins"), {
+    userId,
+  });
 }
