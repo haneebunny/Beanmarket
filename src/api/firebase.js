@@ -6,7 +6,7 @@ import {
   signOut,
   onAuthStateChanged,
 } from "firebase/auth";
-import { getDatabase, ref, set } from "firebase/database";
+import { getDatabase, ref, set, onValue } from "firebase/database";
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -44,5 +44,18 @@ export function writeUserData(userId) {
   const db = getDatabase();
   set(ref(db, "admins"), {
     userId,
+  });
+}
+
+export function readUserData(userId) {
+  const db = getDatabase();
+  const adminRef = ref(db, "admins");
+  onValue(adminRef, (snapshot) => {
+    const data = snapshot.val();
+    console.log(data);
+    return Object.entries(data).toString().includes(userId) ? true : false;
+    //     return data?.map((adminId) => {
+    //       return adminId === userId ? true : false;
+    //     });
   });
 }

@@ -2,6 +2,7 @@ import {
   googleLogin,
   googleLogout,
   onUserStateChange,
+  readUserData,
   writeUserData,
 } from "@/api/firebase";
 import User from "@/components/units/user/User";
@@ -15,7 +16,8 @@ export default function Header() {
   useEffect(() => {
     onUserStateChange((user: any) => {
       setUser(user);
-      writeUserData(user.uid);
+      // writeUserData(user.uid);
+      console.log(readUserData(user.uid));
     });
   }, []);
 
@@ -33,10 +35,10 @@ export default function Header() {
         {user ? (
           <>
             <User user={user} />
-            <button onClick={googleLogin}>로그아웃</button>
+            <button onClick={googleLogout}>로그아웃</button>
           </>
         ) : (
-          <button onClick={googleLogout}>로그인</button>
+          <button onClick={googleLogin}>로그인</button>
         )}
       </nav>
     </header>
